@@ -17,7 +17,7 @@ VERSION_PATTERN = r"""
         (?P<release>[0-9]+(?:\.[0-9]+)*)                  # release segment
         (?P<pre>                                          # pre-release
             [-_\.]?
-            (?P<pre_l>(a|b|c|rc|alpha|beta|pre|preview))
+            (?P<pre_l>(core-one|a|b|c|rc|alpha|beta|pre|preview))
             [-_\.]?
             (?P<pre_n>[0-9]+)?
         )?
@@ -47,7 +47,7 @@ GIT_VERSION_PATTERN = r"""
         (?P<release>[0-9]+(?:\.[0-9]+)*)                  # release segment
         (?P<pre>                                          # pre-release
             [-_\.]?
-            (?P<pre_l>(a|b|c|rc|alpha|beta|pre|preview))
+            (?P<pre_l>(core-one|a|b|c|rc|alpha|beta|pre|preview))
             [-_\.]?
             (?P<pre_n>[0-9]+)?
         )?
@@ -98,6 +98,8 @@ class BaseVersion:
     def short_version(self) -> str:
         if not self._valid_version:
             return "?"
+        if not self._dev_count:
+            return self._tag
         return f"{self._tag}-{self._dev_count}"
 
     @property
@@ -276,14 +278,6 @@ class PyVersion(BaseVersion):
             self._release_type |= ReleaseType.FINAL
         self._dev_count = int(version_info["dev_n"] or 0)
         self.local: Optional[str] = version_info["local"]
-
-    @property
-    def short_version(self) -> str:
-        if not self._valid_version:
-            return "?"
-        if not self._dev_count:
-            return self._tag
-        return f"{self._tag}-{self._dev_count}"
 
     def _get_version_info(self) -> Optional[Dict[str, Any]]:
         ver_match = _py_version_regex.match(self._orig)

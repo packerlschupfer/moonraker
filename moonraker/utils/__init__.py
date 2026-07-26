@@ -80,7 +80,7 @@ def _retrieve_git_tag(source_path: str) -> str:
 # is borrowed from Klipper.
 def retrieve_git_version(source_path: str) -> str:
     # Obtain version info from "git" program
-    cmd = f"git -C {source_path} describe --always --tags --long --dirty"
+    cmd = f"git -C {source_path} describe --always --tags --dirty"
     ver = _run_git_command(cmd)
     tag_match = re.match(r"v\d+\.\d+\.\d+", ver)
     if tag_match is not None:
