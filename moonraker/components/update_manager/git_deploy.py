@@ -365,7 +365,7 @@ class GitRepo:
                     self.git_repo_name = repo_match.group(1)
                 self.current_commit = await self.rev_parse("HEAD")
                 git_desc = await self.describe(
-                    "--always --tags --long --dirty --abbrev=8"
+                    "--always --tags --dirty --abbrev=8"
                 )
                 cur_ver = GitVersion(git_desc.strip())
                 upstream_ver = await self._get_upstream_version()
@@ -578,14 +578,14 @@ class GitRepo:
                 elif await self.is_ancestor(self.current_commit, self.pinned_commit):
                     self.upstream_commit = self.pinned_commit
             upstream_ver_str = await self.describe(
-                f"{self.upstream_commit} --always --tags --long --abbrev=8",
+                f"{self.upstream_commit} --always --tags --abbrev=8",
             )
         elif self.channel == Channel.DEV:
             self.upstream_commit = await self.rev_parse(
                 f"{self.git_remote}/{self.git_branch}"
             )
             upstream_ver_str = await self.describe(
-                f"{self.git_remote}/{self.git_branch} --always --tags --long --abbrev=8"
+                f"{self.git_remote}/{self.git_branch} --always --tags --abbrev=8"
             )
         else:
             tagged_commits = await self.get_tagged_commits()
