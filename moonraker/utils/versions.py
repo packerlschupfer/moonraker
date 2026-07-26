@@ -17,7 +17,7 @@ VERSION_PATTERN = r"""
         (?P<release>[0-9]+(?:\.[0-9]+)*)                  # release segment
         (?P<pre>                                          # pre-release
             [-_\.]?
-            (?P<pre_l>(a|b|c|rc|alpha|beta|pre|preview))
+            (?P<pre_l>(core-one|a|b|c|rc|alpha|beta|pre|preview))
             [-_\.]?
             (?P<pre_n>[0-9]+)?
         )?
@@ -47,7 +47,7 @@ GIT_VERSION_PATTERN = r"""
         (?P<release>[0-9]+(?:\.[0-9]+)*)                  # release segment
         (?P<pre>                                          # pre-release
             [-_\.]?
-            (?P<pre_l>(a|b|c|rc|alpha|beta|pre|preview))
+            (?P<pre_l>(core-one|a|b|c|rc|alpha|beta|pre|preview))
             [-_\.]?
             (?P<pre_n>[0-9]+)?
         )?
