@@ -6,6 +6,11 @@ The format is based on [Keep a Changelog].
 
 ## [Unreleased]
 
+### Added
+- **proc_stats**: Report CPU and memory usage of the connected Klippy process
+  in a new `klippy_stats` field of the `/machine/proc_stats` response and the
+  `notify_proc_stat_update` notification.
+
 ## [0.11.0] - 2026-08-25
 
 ### Changed
